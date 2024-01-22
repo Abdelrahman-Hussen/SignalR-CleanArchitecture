@@ -1,0 +1,65 @@
+// For testing in Postman
+
+{
+    // init
+    /*
+  {
+    "protocol": "json",
+    "version": 1
+  }
+  */
+
+    // print my name and connection Id
+    /*
+  {
+    "arguments": [],
+    "invocationId": "0",
+    "target": "WhoAmI",
+    "type": 1
+  }
+  */
+
+    // send to all Users
+    /*
+    {
+        "arguments": [ "This is the notification message." ],
+        "invocationId": "0",
+        "target": "SendMessage",
+        "type": 1
+    }
+    */
+
+    // send to specific user
+    /*
+    {
+        "arguments": [ "omar", "message to user" ],
+        "invocationId": "0",
+        "target": "SendToUser",
+        "type": 1
+    }
+    */
+
+    // Join to Croup and if itis not found create it 
+    /*
+    {
+        "arguments": [ "Group 1" ],
+        "invocationId": "0",
+        "target": "JoinToGroup",
+        "type": 1
+    }
+    */
+
+    // Send message to specific Group
+    /*
+      {
+        "arguments": [ "Group 1", "Message to Group" ],
+        "invocationId": "0",
+        "target": "SendToGroup",
+        "type": 1
+      }
+    */
+
+
+}
+
+// Don't Forget to make hub-Authrized and send token in header "Authorization"
