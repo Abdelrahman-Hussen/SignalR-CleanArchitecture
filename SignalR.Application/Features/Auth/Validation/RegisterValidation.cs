@@ -7,28 +7,26 @@ namespace SignalR.Application.Validation
     internal class RegisterValidation : AbstractValidator<RegisterDto>
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILocalizationService _localizationService;
 
-        public RegisterValidation(UserManager<ApplicationUser> userManager, ILocalizationService localizationService)
+        public RegisterValidation(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _localizationService = localizationService;
 
             RuleFor(x => x.Email)
                 .NotEmpty()
                 .EmailAddress()
                 .Must(isEmailUsed)
-                .WithMessage(_localizationService.GetMessage(Messages.Error_UserEmailExist));
+                .WithMessage(Message.Error_UserEmailExist);
 
             RuleFor(x => x.PhoneNumber)
                 .NotEmpty()
                 .Must(isPhoneNumberUsed)
-                .WithMessage(_localizationService.GetMessage(Messages.Error_UserPhoneExist));
+                .WithMessage(Message.Error_UserPhoneExist);
 
             RuleFor(x => x.UserName)
                 .NotEmpty()
                 .Must(isUserNameUsed)
-                .WithMessage(_localizationService.GetMessage(Messages.Error_UserNameExist));
+                .WithMessage(Message.Error_UserNameExist);
         }
 
         private bool isEmailUsed(string email)

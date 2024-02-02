@@ -17,7 +17,6 @@ namespace SignalR.Application.DI
             #region Services
 
             //  System // 
-            services.AddSingleton<ILocalizationService, LocalizationService>();
             services.AddScoped<IOTPService, OTPService>();
 
 
@@ -34,7 +33,7 @@ namespace SignalR.Application.DI
 
             // System // 
             services.AddScoped<IValidator<ConfirmMailOTPDto>, ConfirmEmailOTPValidation>();
-            
+
             // Auth // 
             services.AddScoped<IValidator<ChangePasswordDto>, ChangePasswordValidation>();
             services.AddScoped<IValidator<LoginDto>, LoginValidation>();
@@ -53,7 +52,7 @@ namespace SignalR.Application.DI
             services.AddSingleton(config);
 
             TypeAdapterConfig.GlobalSettings.Default.NameMatchingStrategy(NameMatchingStrategy.Flexible);
-            
+
             services.AddScoped<IMapper, ServiceMapper>();
 
             #endregion

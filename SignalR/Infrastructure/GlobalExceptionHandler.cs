@@ -1,8 +1,7 @@
 ﻿using LurkingUnits.Application;
 using Microsoft.AspNetCore.Diagnostics;
 using SignalR.Application;
-using SignalR.Application.Features;
-using SignalR.Domain.Enums;
+using SignalR.Application.Features.System.Resources;
 using System.Net;
 
 namespace SignalR.Infrastructure
@@ -10,11 +9,9 @@ namespace SignalR.Infrastructure
     internal sealed class GlobalExceptionHandler : IExceptionHandler
     {
         private readonly ILogger<GlobalExceptionHandler> _logger;
-        private readonly ILocalizationService _localizationService;
 
-        public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger, ILocalizationService localizationService)
+        public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
         {
-            _localizationService = localizationService;
             _logger = logger;
         }
 
@@ -22,17 +19,17 @@ namespace SignalR.Infrastructure
                                               Exception exception,
                                               CancellationToken cancellationToken)
         {
-            var(statusCode, errorMessage) = GetExaptionType(exception);
+            var (statusCode, errorMessage) = GetExaptionType(exception);
 
             _logger.Log(LogLevel.Error, exception.ToString());
 
             httpContext.Response.StatusCode = statusCode;
 
             var data = httpContext.Request.Method == HttpMethod.Get.ToString() ? httpContext.Request.QueryString.ToString() : httpContext.Request.Body.ToString();
-            
+
             await httpContext.Response
                 .WriteAsJsonAsync(
-                    ResponseModel<string> 
+                    ResponseModel<string>
                     .Error(errorMessage, data),
                     cancellationToken);
 
@@ -42,10 +39,10 @@ namespace SignalR.Infrastructure
         private (int statusCode, string errorMessage) GetExaptionType(Exception exception)
             => exception switch
             {
-                NotFoundException => ((int)HttpStatusCode.NotFound,exception.Message),
+                NotFoundException => ((int)HttpStatusCode.NotFound, exception.Message),
                 BadRequestException => ((int)HttpStatusCode.BadRequest, exception.Message),
                 _ => ((int)HttpStatusCode.InternalServerError,
-                _localizationService.GetMessage(Messages.Error_General))
+                Message.Error_General)
             };
     }
 }

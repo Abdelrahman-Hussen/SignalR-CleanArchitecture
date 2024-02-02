@@ -1,9 +1,8 @@
 ﻿using LurkingUnits.Application;
 using MapsterMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Update.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SignalR.Application.Features.System.Resources;
 using SignalR.Application.Features.User;
 using SignalR.Domain.Models;
 using SignalR.Infrastructure.Reposatory;
@@ -12,7 +11,6 @@ using System.Security.Cryptography;
 namespace SignalR.Application.Features.Auth
 {
     internal class RefreshTokenService(IGenericRepository<RefreshToken> _refreshTokenRepo,
-                                       ILocalizationService _localizationService,
                                        IJwtTokenService _jwtTokenService,
                                        IConfiguration _configuration,
                                        ILogger<RefreshToken> _logger,
@@ -23,7 +21,7 @@ namespace SignalR.Application.Features.Auth
             var refreshToken = GetRefreshToken(token);
 
             if (refreshToken.RevokedOn.HasValue)
-                throw new BadRequestException(_localizationService.GetMessage(Messages.Error_InactiveRefreshToken));
+                throw new BadRequestException(Message.Error_InactiveRefreshToken);
 
             var jwtToken = _jwtTokenService.CreateJwtToken(refreshToken.User);
 
@@ -38,7 +36,7 @@ namespace SignalR.Application.Features.Auth
             {
                 refreshToken.Revoke();
 
-                await _refreshTokenRepo.Save(); 
+                await _refreshTokenRepo.Save();
 
                 var newRefreshToken = await GenerateRefreshToken(refreshToken.UserId);
 
@@ -46,8 +44,7 @@ namespace SignalR.Application.Features.Auth
                     _mapper.Map<ApplicationUserDto>(refreshToken.User));
             }
 
-            return ResponseModel<AuthDto>.Success(authDto,
-                _localizationService.GetMessage(Messages.Success_General));
+            return ResponseModel<AuthDto>.Success(authDto, Message.Success_General);
         }
 
         public async Task<RefreshToken> GenerateRefreshToken(string userId)
@@ -105,12 +102,9 @@ namespace SignalR.Application.Features.Auth
                 .GetEntityWithSpec(RefreshTokenSpecification.GetByToken(token));
 
             if (result is null)
-                throw new BadRequestException(_localizationService.GetMessage(Messages.Error_InvalidRefreshToken));
+                throw new BadRequestException(Message.Error_InvalidRefreshToken);
 
             return result;
         }
     }
 }
-//  http://91.106.107.234:8107/api/Levels/14?parentId=2    get
-
-//   http://91.106.107.234:8107/api/Levels/10?parentId=2

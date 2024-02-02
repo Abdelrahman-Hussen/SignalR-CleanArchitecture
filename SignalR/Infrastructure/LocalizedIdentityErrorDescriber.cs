@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SignalR.Application.Features;
-using SignalR.Domain.Enums;
+using SignalR.Application.Features.System.Resources;
 
 namespace SignalR.Infrastructure
 {
-    public class LocalizedIdentityErrorDescriber(ILocalizationService _localizationService) : IdentityErrorDescriber
+    public class LocalizedIdentityErrorDescriber() : IdentityErrorDescriber
     {
         public override IdentityError DuplicateEmail(string email)
         {
             return new IdentityError
             {
                 Code = nameof(DuplicateEmail),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_DuplicateEmail), email)
+                Description = string.Format(Message.IdentityError_DuplicateEmail, email)
             };
         }
 
@@ -20,7 +19,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(DuplicateUserName),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_DuplicateUserName), userName)
+                Description = string.Format(Message.IdentityError_DuplicateUserName, userName)
             };
         }
 
@@ -29,7 +28,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(InvalidEmail),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_InvalidEmail), email)
+                Description = string.Format(Message.IdentityError_InvalidEmail, email)
             };
         }
 
@@ -38,7 +37,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(DuplicateRoleName),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_DuplicateRoleName), role)
+                Description = string.Format(Message.IdentityError_DuplicateRoleName, role)
             };
         }
 
@@ -47,7 +46,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(InvalidRoleName),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_InvalidRoleName), role)
+                Description = string.Format(Message.IdentityError_InvalidRoleName, role)
             };
         }
 
@@ -56,7 +55,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(InvalidUserName),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_InvalidUserName), userName)
+                Description = string.Format(Message.IdentityError_InvalidUserName, userName)
             };
         }
 
@@ -65,7 +64,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(PasswordMismatch),
-                Description = _localizationService.GetMessage(Messages.IdentityError_PasswordMismatch)
+                Description = Message.IdentityError_PasswordMismatch
             };
         }
 
@@ -74,7 +73,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(PasswordRequiresDigit),
-                Description = _localizationService.GetMessage(Messages.IdentityError_PasswordRequiresDigit)
+                Description = Message.IdentityError_PasswordRequiresDigit
             };
         }
 
@@ -83,7 +82,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(PasswordRequiresLower),
-                Description = _localizationService.GetMessage(Messages.IdentityError_PasswordRequiresLower)
+                Description = Message.IdentityError_PasswordRequiresLower
             };
         }
 
@@ -92,7 +91,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(PasswordRequiresNonAlphanumeric),
-                Description = _localizationService.GetMessage(Messages.IdentityError_PasswordRequiresNonAlphanumeric)
+                Description = Message.IdentityError_PasswordRequiresNonAlphanumeric
             };
         }
 
@@ -101,7 +100,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(PasswordRequiresUniqueChars),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_PasswordRequiresUniqueChars), uniqueChars)
+                Description = string.Format(Message.IdentityError_PasswordRequiresUniqueChars, uniqueChars)
             };
         }
 
@@ -110,7 +109,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(PasswordRequiresUpper),
-                Description = _localizationService.GetMessage(Messages.IdentityError_PasswordRequiresUpper)
+                Description = Message.IdentityError_PasswordRequiresUpper
             };
         }
 
@@ -119,7 +118,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(PasswordTooShort),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_PasswordTooShort), length)
+                Description = string.Format(Message.IdentityError_PasswordTooShort, length)
             };
         }
 
@@ -128,7 +127,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(UserAlreadyInRole),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_UserAlreadyInRole), role)
+                Description = string.Format(Message.IdentityError_UserAlreadyInRole, role)
             };
         }
 
@@ -137,7 +136,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(UserNotInRole),
-                Description = string.Format(_localizationService.GetMessage(Messages.IdentityError_UserNotinRole), role)
+                Description = string.Format(Message.IdentityError_UserNotinRole, role)
             };
         }
 
@@ -146,7 +145,7 @@ namespace SignalR.Infrastructure
             return new IdentityError
             {
                 Code = nameof(DefaultError),
-                Description = _localizationService.GetMessage(Messages.IdentityError_DefaultIdentityError)
+                Description = Message.IdentityError_DefaultIdentityError
             };
         }
     }
