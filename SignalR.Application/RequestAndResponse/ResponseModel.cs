@@ -12,7 +12,7 @@
             {
                 Data = data,
                 Ok = true,
-                Message = SignalR.Application.Features.System.Resources.Message.Success_General,
+                Message = message ?? SignalR.Application.Features.System.Resources.Message.Success_General,
             };
         }
 
@@ -22,7 +22,7 @@
             {
                 Data = data,
                 Ok = false,
-                Message = SignalR.Application.Features.System.Resources.Message.Error_General
+                Message = message ?? SignalR.Application.Features.System.Resources.Message.Error_General
             };
         }
     }
