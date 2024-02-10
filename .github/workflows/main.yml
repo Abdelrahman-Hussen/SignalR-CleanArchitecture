@@ -42,6 +42,3 @@ jobs:
         username: ${{ env.FTP_USERNAME }}
         password: ${{ env.FTP_PASSWORD }}
         local-dir: ${{ env.WEBAPP_PACKAGE_PATH }}
-        
-        
-
