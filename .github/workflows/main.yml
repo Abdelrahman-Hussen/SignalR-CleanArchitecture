@@ -39,6 +39,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
         ftp-server: ${{ env.FTP_SERVER }}
-        username: ${{ env.FTP_USERNAME }}
-        password: ${{ env.FTP_PASSWORD }}
+        ftp-username: ${{ env.FTP_USERNAME }}
+        ftp-password: ${{ env.FTP_PASSWORD }}
         local-dir: ${{ env.WEBAPP_PACKAGE_PATH }}
