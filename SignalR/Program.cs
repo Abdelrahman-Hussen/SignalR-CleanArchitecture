@@ -1,10 +1,11 @@
+using LurkingUnits.Application;
 using Microsoft.Extensions.Options;
-using SignalR.Extensions;
 using SignalR.Application.DI;
+using SignalR.Application.Hubs.Chat;
+using SignalR.Extensions;
+using SignalR.Infrastructure;
 using SignalR.Infrastructure.DI;
 using System.Text.Json.Serialization;
-using SignalR.Infrastructure;
-using SignalR.Application.Hubs.Chat;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,11 +44,10 @@ var service = builder.Services.BuildServiceProvider();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+
+app.UseSwaggerUI();
 
 app.UseRequestLocalization(service.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
@@ -60,5 +60,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapHub<ChatHub>("/Chat-hub");
+
+app.MapGet("time", () => ResponseModel<DateTime>.Success(DateTime.Now));
 
 app.Run();
