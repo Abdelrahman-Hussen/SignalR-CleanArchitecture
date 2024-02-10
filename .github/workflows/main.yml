@@ -9,7 +9,7 @@ on:
 env:
   WEBAPP_NAME: base-project
   WEBAPP_PACKAGE_PATH: "./publish"
-  FTP_SERVER: win8007.site4now.net
+  FTP_SERVER: 'win8007.site4now.net'
   FTP_USERNAME: abdelrahman000-001
   FTP_PASSWORD: abdo2001
   
@@ -41,9 +41,7 @@ jobs:
         server: ${{ env.FTP_SERVER }}
         username: ${{ env.FTP_USERNAME }}
         password: ${{ env.FTP_PASSWORD }}
-        app-name: ${{ env.WEBAPP_NAME }}
-        publish-profile: ${{ secrets.SMARTER_PUBLISH_PROFILE }}
-        package: "${{ env.WEBAPP_PACKAGE_PATH }}"
+        local-dir: ${{ env.WEBAPP_PACKAGE_PATH }}
         
         
 
