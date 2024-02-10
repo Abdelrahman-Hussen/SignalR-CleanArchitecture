@@ -9,10 +9,10 @@ on:
 env:
   WEBAPP_NAME: base-project
   WEBAPP_PACKAGE_PATH: "./publish/"
+  FTP_DISTANATION_URL: 'http://abdelrahman000-001-site1.anytempurl.com/'
   FTP_SERVER: 'win8007.site4now.net:21/base'
   FTP_USERNAME: abdelrahman000-001
   FTP_PASSWORD: abdo2001
-  FTB_DISTANATION_URL: 'http://abdelrahman000-001-site1.anytempurl.com/'
   
 
 jobs:
@@ -43,4 +43,4 @@ jobs:
         username: ${{ env.FTP_USERNAME }}
         password: ${{ env.FTP_PASSWORD }}
         local-dir: ${{ env.WEBAPP_PACKAGE_PATH }}
-        destinationAppUrl: ${{FTB_DISTANATION_URL}}
+        destinationAppUrl: ${{env.FTP_DISTANATION_URL}}
