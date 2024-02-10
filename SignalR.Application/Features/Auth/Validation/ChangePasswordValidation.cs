@@ -7,19 +7,16 @@ namespace SignalR.Application.Validation
     internal class ChangePasswordValidation : AbstractValidator<ChangePasswordDto>
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILocalizationService _localizationService;
 
-        public ChangePasswordValidation(UserManager<ApplicationUser> userManager,
-                                        ILocalizationService localizationService)
+        public ChangePasswordValidation(UserManager<ApplicationUser> userManager)
         {
-            _localizationService = localizationService;
             _userManager = userManager;
 
             RuleFor(x => x.Email)
                 .NotEmpty()
                 .EmailAddress()
                 .Must(isUserExist)
-                .WithMessage(_localizationService.GetMessage(Messages.Error_UserEmailNotExist));
+                .WithMessage(Message.Error_UserEmailNotExist);
         }
 
         private bool isUserExist(string email)
