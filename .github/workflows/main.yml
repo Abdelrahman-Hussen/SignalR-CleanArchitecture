@@ -42,5 +42,6 @@ jobs:
         server: ${{ env.FTP_SERVER }}
         username: ${{ env.FTP_USERNAME }}
         password: ${{ env.FTP_PASSWORD }}
-        local-dir: ${{ env.WEBAPP_PACKAGE_PATH }}base/
+        local-dir: ${{ env.WEBAPP_PACKAGE_PATH }}
+        destinationPath: '/base/'
         destinationAppUrl: ${{env.FTP_DISTANATION_URL}}
