@@ -15,7 +15,6 @@ namespace SignalR.Controllers
         {
             var x = "";
             throw new NotFoundException("");
-            return Ok(x);
         }
 
 
@@ -24,7 +23,6 @@ namespace SignalR.Controllers
         {
             var x = "";
             throw new BadRequestException("");
-            return Ok(x);
         }
 
         [HttpGet("[action]")]
