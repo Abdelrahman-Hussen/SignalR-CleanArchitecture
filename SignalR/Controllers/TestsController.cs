@@ -7,11 +7,11 @@ namespace SignalR.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class TestsController : ControllerBase
     {
 
         [HttpGet("[action]")]
-        public IActionResult Get(string name)
+        public IActionResult GetNotFoundException(string name)
         {
             var x = "";
             throw new NotFoundException("");
@@ -20,7 +20,7 @@ namespace SignalR.Controllers
 
 
         [HttpPost("[action]")]
-        public IActionResult Post([FromBody] string name)
+        public IActionResult PostBadRequestException([FromBody] string name)
         {
             var x = "";
             throw new BadRequestException("");
@@ -28,11 +28,11 @@ namespace SignalR.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> testDekay()
+        public async Task<IActionResult> testDekay(int milliseconds)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            await Task.Delay(1500);
+            await Task.Delay(milliseconds);
             stopwatch.Stop();
             return Ok(stopwatch.ElapsedMilliseconds);
         }
