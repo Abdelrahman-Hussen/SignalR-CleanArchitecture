@@ -11,8 +11,8 @@ env:
   WEBAPP_PACKAGE_PATH: "./publish/"
   FTP_DISTANATION_URL: 'http://abdelrahman000-001-site1.anytempurl.com/'
   FTP_SERVER: 'win8007.site4now.net'
-  FTP_USERNAME: abdelrahman000-001
-  FTP_PASSWORD: abdo2001
+  FTP_USERNAME: abdelrahman000_00123
+  FTP_PASSWORD: abdo2001abdo
   
 
 jobs:
