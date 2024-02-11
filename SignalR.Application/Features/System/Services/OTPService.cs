@@ -6,8 +6,7 @@ using SingalR.Application.Utils;
 
 namespace SignalR.Application.Features.System
 {
-    internal class OTPService(IGenericRepository<OTP> _otpRepo,
-                              IValidator<ConfirmMailOTPDto> _confirmOTPValidation) : IOTPService
+    internal class OTPService(IGenericRepository<OTP> _otpRepo, IValidator<ConfirmMailOTPDto> _confirmOTPValidation) : IOTPService
     {
         public async Task<ResponseModel<string>> SendOTPViaMail(SendMailOTPDto sendOTPDto)
         {
