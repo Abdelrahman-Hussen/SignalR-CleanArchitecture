@@ -1,0 +1,47 @@
+name: Publish 🚀
+
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+env:
+  WEBAPP_NAME: base-project
+  WEBAPP_PACKAGE_PATH: "./publish/"
+  FTP_DISTANATION_URL: 'http://abdelrahman000-001-site1.anytempurl.com/'
+  FTP_SERVER: 'win8007.site4now.net'
+  FTP_USERNAME: abdelrahman000_00123
+  FTP_PASSWORD: abdo2001abdo
+  
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore
+      run: dotnet restore ./SignalR.sln
+
+    - name: Build
+      run: dotnet build ./SignalR.sln --configuration Release --no-restore
+
+    - name: Publish
+      run: dotnet publish ./SignalR.sln --configuration Release --no-build --output '${{ env.WEBAPP_PACKAGE_PATH }}'
+
+    - name: Deployment
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ${{ env.FTP_SERVER }}
+        username: ${{ env.FTP_USERNAME }}
+        password: ${{ env.FTP_PASSWORD }}
+        local-dir: ${{ env.WEBAPP_PACKAGE_PATH }}
+        destinationPath: '/base/'
+        destinationAppUrl: ${{env.FTP_DISTANATION_URL}}
